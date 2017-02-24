@@ -214,30 +214,21 @@ static IoT_Error_t _aws_iot_mqtt_serialize_connect(unsigned char *pTxBuf, size_t
 
 	/* If the code have passed the check for incorrect values above, no client id was passed as argument */
 	if(NULL == pConnectParams->pClientID) {
-		IOT_INFO("\n** NO CLIENT ID\n");
 		aws_iot_mqtt_internal_write_uint_16(&ptr, 0);
 	} else {
-		IOT_INFO("\n** CLIENT ID: %s\n", pConnectParams->pClientID);
 		aws_iot_mqtt_internal_write_utf8_string(&ptr, pConnectParams->pClientID, pConnectParams->clientIDLen);
 	}
 
 	if(pConnectParams->isWillMsgPresent) {
-		IOT_INFO("\n** TOPIC: %s\n", pConnectParams->will.pTopicName);
-		IOT_INFO("\n** MESSAGE: %s\n", pConnectParams->will.pMessage);
 		aws_iot_mqtt_internal_write_utf8_string(&ptr, pConnectParams->will.pTopicName,
 												pConnectParams->will.topicNameLen);
 		aws_iot_mqtt_internal_write_utf8_string(&ptr, pConnectParams->will.pMessage, pConnectParams->will.msgLen);
-	} else {
-		IOT_INFO("\n** NO MSG PRESENT\n");
 	}
-
 	if(flags.bits.username) {
-		IOT_INFO("\n** USERNAME: %s\n", pConnectParams->pUsername);
 		aws_iot_mqtt_internal_write_utf8_string(&ptr, pConnectParams->pUsername, pConnectParams->usernameLen);
 	}
 
 	if(flags.bits.password) {
-		IOT_INFO("\n** PASSWORD: %s\n", pConnectParams->pPassword);
 		aws_iot_mqtt_internal_write_utf8_string(&ptr, pConnectParams->pPassword, pConnectParams->passwordLen);
 	}
 

@@ -288,9 +288,7 @@ IoT_Error_t aws_iot_mqtt_internal_send_packet(AWS_IoT_Client *pClient, size_t le
 
 	sentLen = 0;
 	sent = 0;
-	IOT_INFO("\n** LENGTH: %d\n", length);
 	while(sent < length && !has_timer_expired(pTimer)) {
-		IOT_INFO("\n** SEND: %s\n", &pClient->clientData.writeBuf[sent]);
 		rc = pClient->networkStack.write(&(pClient->networkStack), &pClient->clientData.writeBuf[sent], length, pTimer,
 										 &sentLen);
 		if(SUCCESS != rc) {
@@ -298,7 +296,6 @@ IoT_Error_t aws_iot_mqtt_internal_send_packet(AWS_IoT_Client *pClient, size_t le
 			break;
 		}
 		sent += sentLen;
-		IOT_INFO("\n** SENT: %d\n", sent);
 	}
 
 #ifdef _ENABLE_THREAD_SUPPORT_
@@ -309,7 +306,6 @@ IoT_Error_t aws_iot_mqtt_internal_send_packet(AWS_IoT_Client *pClient, size_t le
 #endif
 
 	if(sent == length) {
-		IOT_INFO("\n** SENT SUCCESS\n");
 		/* record the fact that we have successfully sent the packet */
 		//countdown_sec(&c->pingTimer, c->clientData.keepAliveInterval);
 		FUNC_EXIT_RC(SUCCESS);
