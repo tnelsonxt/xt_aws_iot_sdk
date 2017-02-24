@@ -37,6 +37,9 @@
 #include "aws_iot_version.h"
 #include "aws_iot_mqtt_client_interface.h"
 
+#include "mbedtls/memory_buffer_alloc.h"
+unsigned char memory_buf[85000]; // @todo TAN
+
 /**
  * @brief Default cert location
  */
@@ -170,6 +173,8 @@ int main(int argc, char **argv) {
 	mqttInitParams.disconnectHandler = disconnectCallbackHandler;
 	mqttInitParams.disconnectHandlerData = NULL;
 
+	mbedtls_memory_buffer_alloc_init( memory_buf, sizeof(memory_buf));
+
 	rc = aws_iot_mqtt_init(&client, &mqttInitParams);
 	if(SUCCESS != rc) {
 		IOT_ERROR("aws_iot_mqtt_init returned error : %d ", rc);
@@ -250,6 +255,8 @@ int main(int argc, char **argv) {
 		if(publishCount > 0) {
 			publishCount--;
 		}
+
+		//mbedtls_memory_buffer_alloc_status();
 	}
 
 	if(SUCCESS != rc) {
