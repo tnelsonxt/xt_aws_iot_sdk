@@ -71,7 +71,6 @@ ifndef WINDOWS
 # make CFLAGS='--coverage -g3 -O0'
 covtest:
 	$(MAKE) check
-	programs/test/selftest
 	tests/compat.sh
 	tests/ssl-opt.sh
 
