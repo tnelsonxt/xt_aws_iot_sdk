@@ -961,7 +961,7 @@
  *
  * Comment this macro to disable support for FALLBACK_SCSV
  */
-#define MBEDTLS_SSL_FALLBACK_SCSV
+//#define MBEDTLS_SSL_FALLBACK_SCSV
 
 /**
  * \def MBEDTLS_SSL_HW_RECORD_ACCEL
