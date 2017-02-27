@@ -38,7 +38,7 @@
 #include "aws_iot_mqtt_client_interface.h"
 
 #include "mbedtls/memory_buffer_alloc.h"
-unsigned char memory_buf[85000]; // @todo TAN
+unsigned char memory_buf[62000]; // @todo TAN
 
 /**
  * @brief Default cert location
