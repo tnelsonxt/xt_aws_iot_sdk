@@ -314,7 +314,7 @@
  *
  * Enable Cipher Block Chaining mode (CBC) for symmetric ciphers.
  */
-#define MBEDTLS_CIPHER_MODE_CBC
+//#define MBEDTLS_CIPHER_MODE_CBC
 
 /**
  * \def MBEDTLS_CIPHER_MODE_CFB
@@ -2341,7 +2341,7 @@
  * Module:  library/xtea.c
  * Caller:
  */
-#define MBEDTLS_XTEA_C
+//#define MBEDTLS_XTEA_C
 
 /* \} name SECTION: mbed TLS modules */
 
