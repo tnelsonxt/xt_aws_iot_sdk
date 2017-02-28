@@ -2013,7 +2013,7 @@
  *
  * This module enables PKCS#12 functions.
  */
-#define MBEDTLS_PKCS12_C
+//#define MBEDTLS_PKCS12_C
 
 /**
  * \def MBEDTLS_PLATFORM_C
