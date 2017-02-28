@@ -60,14 +60,6 @@ uint32_t port = AWS_IOT_MQTT_PORT;
  */
 uint32_t publishCount = 0;
 
-void iot_subscribe_callback_handler(AWS_IoT_Client *pClient, char *topicName, uint16_t topicNameLen,
-									IoT_Publish_Message_Params *params, void *pData) {
-	IOT_UNUSED(pData);
-	IOT_UNUSED(pClient);
-	IOT_INFO("Subscribe callback");
-	IOT_INFO("%.*s\t%.*s", topicNameLen, topicName, (int) params->payloadLen, params->payload);
-}
-
 void disconnectCallbackHandler(AWS_IoT_Client *pClient, void *data) {
 	IOT_WARN("MQTT Disconnect");
 	IoT_Error_t rc = FAILURE;
@@ -202,13 +194,6 @@ int main(int argc, char **argv) {
 	rc = aws_iot_mqtt_autoreconnect_set_status(&client, true);
 	if(SUCCESS != rc) {
 		IOT_ERROR("Unable to set Auto Reconnect to true - %d", rc);
-		return rc;
-	}
-
-	IOT_INFO("Subscribing...");
-	rc = aws_iot_mqtt_subscribe(&client, "sdkTest/sub", 11, QOS0, iot_subscribe_callback_handler, NULL);
-	if(SUCCESS != rc) {
-		IOT_ERROR("Error subscribing : %d ", rc);
 		return rc;
 	}
 
