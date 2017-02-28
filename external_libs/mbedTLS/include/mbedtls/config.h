@@ -1580,6 +1580,7 @@
  *
  * Enable the generic cipher layer.
  *
+ *
  * Module:  library/cipher.c
  * Caller:  library/ssl_tls.c
  *
@@ -1613,7 +1614,7 @@
  *
  * This module provides debugging functions.
  */
-#define MBEDTLS_DEBUG_C
+//#define MBEDTLS_DEBUG_C
 
 /**
  * \def MBEDTLS_DES_C
