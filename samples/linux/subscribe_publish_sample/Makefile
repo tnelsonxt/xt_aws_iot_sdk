@@ -53,6 +53,7 @@ LOG_FLAGS += -DENABLE_IOT_ERROR
 COMPILER_FLAGS += $(LOG_FLAGS)
 #If the processor is big endian uncomment the compiler flag
 #COMPILER_FLAGS += -DREVERSED
+COMPILER_FLAGS += -Os 
 
 MBED_TLS_MAKE_CMD = $(MAKE) -C $(MBEDTLS_DIR)
 
