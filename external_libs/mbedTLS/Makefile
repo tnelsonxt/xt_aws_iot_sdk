@@ -4,9 +4,9 @@ PREFIX=mbedtls_
 
 .SILENT:
 
-.PHONY: all no_test programs lib tests install uninstall clean test check covtest lcov apidoc apidoc_clean
+.PHONY: all no_test programs lib install uninstall clean test check covtest lcov apidoc apidoc_clean
 
-all: programs tests
+all: programs
 
 no_test: programs
 
@@ -15,9 +15,6 @@ programs: lib
 
 lib:
 	$(MAKE) -C library
-
-tests: lib
-	$(MAKE) -C tests
 
 ifndef WINDOWS
 install: no_test
@@ -56,13 +53,9 @@ endif
 clean:
 	$(MAKE) -C library clean
 	$(MAKE) -C programs clean
-	$(MAKE) -C tests clean
 ifndef WINDOWS
 	find . \( -name \*.gcno -o -name \*.gcda -o -name *.info \) -exec rm {} +
 endif
-
-check: lib
-	$(MAKE) -C tests check
 
 test: check
 
@@ -71,8 +64,6 @@ ifndef WINDOWS
 # make CFLAGS='--coverage -g3 -O0'
 covtest:
 	$(MAKE) check
-	tests/compat.sh
-	tests/ssl-opt.sh
 
 lcov:
 	rm -rf Coverage
@@ -80,7 +71,6 @@ lcov:
 	lcov --capture --directory library -o tests.info
 	lcov --add-tracefile files.info --add-tracefile tests.info -o all.info
 	lcov --remove all.info -o final.info '*.h'
-	gendesc tests/Descriptions.txt -o descriptions
 	genhtml --title "mbed TLS" --description-file descriptions --keep-descriptions --legend --no-branch-coverage -o Coverage final.info
 	rm -f files.info tests.info all.info final.info descriptions
 
