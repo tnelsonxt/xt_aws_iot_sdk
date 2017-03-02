@@ -10,8 +10,6 @@ set(src_crypto
     asn1write.c
     base64.c
     bignum.c
-    blowfish.c
-    camellia.c
     ccm.c
     cipher.c
     cipher_wrap.c
