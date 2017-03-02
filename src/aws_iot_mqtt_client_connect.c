@@ -608,7 +608,6 @@ IoT_Error_t aws_iot_mqtt_attempt_reconnect(AWS_IoT_Client *pClient) {
 		FUNC_EXIT_RC(NETWORK_ATTEMPTING_RECONNECT);
 	}
 
-	rc = aws_iot_mqtt_resubscribe(pClient);
 	if(SUCCESS != rc) {
 		FUNC_EXIT_RC(rc);
 	}
