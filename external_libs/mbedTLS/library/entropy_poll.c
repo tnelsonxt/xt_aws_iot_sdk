@@ -213,4 +213,20 @@ int mbedtls_havege_poll( void *data,
 }
 #endif /* MBEDTLS_HAVEGE_C */
 
+int mbedtls_hardware_poll( void *data,
+		unsigned char *output, size_t len, size_t *olen )
+{
+    char todo[] = {'t','o','d','o'}; // @todo TAN
+    ((void) data);
+    *olen = 0;
+
+    if( len < 4 )
+        return( 0 );
+
+    memcpy( output, todo, 4 );
+    *olen = 4;
+
+    return 0;
+}
+
 #endif /* MBEDTLS_ENTROPY_C */
