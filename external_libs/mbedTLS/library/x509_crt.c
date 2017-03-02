@@ -972,6 +972,14 @@ int mbedtls_x509_crt_parse( mbedtls_x509_crt *chain, const unsigned char *buf, s
     if( chain == NULL || buf == NULL )
         return( MBEDTLS_ERR_X509_BAD_INPUT_DATA );
 
+//    printf("\n\n**CERT (%d)\n\n", buflen);
+//    for (int i=0; i<buflen; i++) {
+//    	if (!(i%8)) {
+//    		printf("\n");
+//    	}
+//    	printf("0x%02x, ", buf[i]);
+//    }
+
     /*
      * Determine buffer content. Buffer contains either one DER certificate or
      * one or more PEM certificates.
