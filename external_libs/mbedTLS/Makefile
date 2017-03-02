@@ -4,20 +4,13 @@ PREFIX=mbedtls_
 
 .SILENT:
 
-.PHONY: all no_test programs lib install uninstall clean test check covtest lcov apidoc apidoc_clean
-
-all: programs
-
-no_test: programs
-
-programs: lib
-	$(MAKE) -C programs
+.PHONY: all lib install uninstall clean test check covtest lcov apidoc apidoc_clean
 
 lib:
 	$(MAKE) -C library
 
 ifndef WINDOWS
-install: no_test
+install:
 	mkdir -p $(DESTDIR)/include/mbedtls
 	cp -r include/mbedtls $(DESTDIR)/include
 	
@@ -27,32 +20,16 @@ install: no_test
 	cp -RP library/libmbedcrypto.* $(DESTDIR)/lib
 	
 	mkdir -p $(DESTDIR)/bin
-	for p in programs/*/* ; do              \
-	    if [ -x $$p ] && [ ! -d $$p ] ;     \
-	    then                                \
-	        f=$(PREFIX)`basename $$p` ;     \
-	        cp $$p $(DESTDIR)/bin/$$f ;     \
-	    fi                                  \
-	done
 
 uninstall:
 	rm -rf $(DESTDIR)/include/mbedtls
 	rm -f $(DESTDIR)/lib/libmbedtls.*
 	rm -f $(DESTDIR)/lib/libmbedx509.*
 	rm -f $(DESTDIR)/lib/libmbedcrypto.*
-	
-	for p in programs/*/* ; do              \
-	    if [ -x $$p ] && [ ! -d $$p ] ;     \
-	    then                                \
-	        f=$(PREFIX)`basename $$p` ;     \
-	        rm -f $(DESTDIR)/bin/$$f ;      \
-	    fi                                  \
-	done
 endif
 
 clean:
 	$(MAKE) -C library clean
-	$(MAKE) -C programs clean
 ifndef WINDOWS
 	find . \( -name \*.gcno -o -name \*.gcda -o -name *.info \) -exec rm {} +
 endif
