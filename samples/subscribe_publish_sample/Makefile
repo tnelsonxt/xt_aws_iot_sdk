@@ -13,10 +13,10 @@ APP_NAME = subscribe_publish_sample
 APP_SRC_FILES = $(APP_NAME).c
 
 #IoT client directory
-IOT_CLIENT_DIR = ../../..
+IOT_CLIENT_DIR = ../..
 
-PLATFORM_DIR = $(IOT_CLIENT_DIR)/platform/linux/mbedtls
-PLATFORM_COMMON_DIR = $(IOT_CLIENT_DIR)/platform/linux/common
+PLATFORM_DIR = $(IOT_CLIENT_DIR)/platform/mbedtls
+PLATFORM_COMMON_DIR = $(IOT_CLIENT_DIR)/platform/common
 
 IOT_INCLUDE_DIRS += -I $(IOT_CLIENT_DIR)/include
 IOT_INCLUDE_DIRS += -I $(IOT_CLIENT_DIR)/external_libs/jsmn
@@ -53,7 +53,6 @@ LOG_FLAGS += -DENABLE_IOT_ERROR
 COMPILER_FLAGS += $(LOG_FLAGS)
 #If the processor is big endian uncomment the compiler flag
 #COMPILER_FLAGS += -DREVERSED
-COMPILER_FLAGS += -Os 
 
 MBED_TLS_MAKE_CMD = $(MAKE) -C $(MBEDTLS_DIR)
 
