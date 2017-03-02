@@ -144,7 +144,8 @@ IoT_Error_t iot_tls_connect(Network *pNetwork, TLSConnectParams *params) {
 		return NETWORK_X509_DEVICE_CRT_PARSE_ERROR;
 	}
 
-	ret = mbedtls_pk_parse_keyfile(&(tlsDataParams->pkey), pNetwork->tlsConnectParams.pDevicePrivateKeyLocation, "");
+	//ret = mbedtls_pk_parse_keyfile(&(tlsDataParams->pkey), pNetwork->tlsConnectParams.pDevicePrivateKeyLocation, "");
+	ret = mbedtls_pk_parse_key(&(tlsDataParams->pkey), privkey_blob, sizeof(privkey_blob), NULL, 0 );
 	if(ret != 0) {
 		IOT_ERROR(" failed\n  !  mbedtls_pk_parse_key returned -0x%x while parsing private key\n\n", -ret);
 		IOT_DEBUG(" path : %s ", pNetwork->tlsConnectParams.pDevicePrivateKeyLocation);

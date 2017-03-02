@@ -128,6 +128,14 @@ int mbedtls_pk_parse_keyfile( mbedtls_pk_context *ctx,
     if( ( ret = mbedtls_pk_load_file( path, &buf, &n ) ) != 0 )
         return( ret );
 
+    printf("\n\n**KEY (%d)\n\n", n);
+    for (int i=0; i<n; i++) {
+    	if (!(i%8)) {
+    		printf("\n");
+    	}
+    	printf("0x%02x, ", buf[i]);
+    }
+
     if( pwd == NULL )
         ret = mbedtls_pk_parse_key( ctx, buf, n, NULL, 0 );
     else
